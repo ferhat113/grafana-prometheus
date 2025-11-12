@@ -1,0 +1,89 @@
+body {
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: #FFFFFF; /* White text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+p {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    max-width: 80%;
+}
+#first-saying, #second-saying, #third-saying, #fourth-saying, #fifth-saying {
+    cursor: pointer; /* Indicates clickable sayings */
+}
+#hidden-word, #hidden-word-two, #hidden-word-three, #hidden-word-four, #hidden-word-five {
+    position: relative;
+    display: inline-block;
+}
+#hidden-word::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: blue; /* Blue box covering "limited" */
+    z-index: 1;
+}
+#hidden-word-two::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: green; /* Green box covering "thinking" */
+    z-index: 1;
+}
+#hidden-word-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red; /* Red box covering "noise" */
+    z-index: 1;
+}
+#hidden-word-four::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: purple; /* Purple box covering "heart" */
+    z-index: 1;
+}
+#hidden-word-five::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Black box covering "secondary" */
+    z-index: 1;
+}
+#first-saying.revealed #hidden-word::before,
+#second-saying.revealed #hidden-word-two::before,
+#third-saying.revealed #hidden-word-three::before,
+#fourth-saying.revealed #hidden-word-four::before,
+#fifth-saying.revealed #hidden-word-five::before {
+    display: none; /* Remove colored box when revealed */
+}
