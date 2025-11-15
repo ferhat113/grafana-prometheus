@@ -25,8 +25,20 @@ services:
     container_name: my-webapp
     ports:
       - "8090:80"
+    volumes:
+      - /root/grafana-prometheus:/grafana-prometheus
+      - webapp_storage:/path/in/webapp
     networks:
       - monitoring
+      
+  node-exporter:
+    image: quay.io/prometheus/node-exporter
+    container_name: node-exporter
+    ports:
+      - "9100:9100"  # Default port for node-exporter
+    networks:
+      - monitoring
+    restart: always  # Optional: ensure the container restarts on failure
 
 networks:
   monitoring:
@@ -35,3 +47,5 @@ networks:
 volumes:
   grafana_storage:
   prometheus_storage:
+  webapp_storage:
+
