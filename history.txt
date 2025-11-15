@@ -1,17 +1,21 @@
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' node-exporter my-webapp
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cat << 'EOF' >> /var/lib/docker/volumes/grafana-prometheus_prometheus_storage/_data/prometheus.yml
 
   - job_name: "node-exporter"
     static_configs:
-      - targets: ["172.17.0.2:9100"]
+      - targets: ["172.25.0.22:9100"]
         labels:
           app: "node-exporter"
   - job_name: "my-webapp"
     static_configs:
-      - targets: ["172.17.0.5:9100"] 
+      - targets: ["172.25.0.21:9100"]
         labels:
           app: "my-webapp"
+EOF
 
+docker compose restart prometheus
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-cp prometheus.yml /var/lib/docker/volumes/grafana-prometheus_prometheus_storage/_data/prometheus.yml
+
+
