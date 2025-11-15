@@ -12,3 +12,6 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nod
       - targets: ["172.17.0.5:9100"] 
         labels:
           app: "my-webapp"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cp prometheus.yml /var/lib/docker/volumes/grafana-prometheus_prometheus_storage/_data/prometheus.yml

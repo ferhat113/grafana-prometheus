@@ -16,7 +16,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ${HOME}/grafana-prometheus/prometheus:/etc/prometheus
+      - prometheus_storage:/etc/prometheus
     command: '--config.file=/etc/prometheus/prometheus.yml'
     networks:
       monitoring:
@@ -54,4 +54,5 @@ networks:
 
 volumes:
   grafana_storage:
+  prometheus_storage:
   webapp_storage:
