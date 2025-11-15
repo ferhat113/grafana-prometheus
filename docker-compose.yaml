@@ -7,7 +7,8 @@ services:
     volumes:
       - grafana_storage:/var/lib/grafana
     networks:
-      - monitoring
+      monitoring:
+        ipv4_address: 172.25.0.11
 
   prometheus:
     image: prom/prometheus
@@ -15,10 +16,11 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - prometheus_storage:/etc/prometheus
+      - ${HOME}/grafana-prometheus/prometheus:/etc/prometheus
     command: '--config.file=/etc/prometheus/prometheus.yml'
     networks:
-      - monitoring
+      monitoring:
+        ipv4_address: 172.25.0.12
 
   webapp:
     build: .
@@ -30,22 +32,26 @@ services:
       - /root/grafana-prometheus:/grafana-prometheus
       - webapp_storage:/path/in/webapp
     networks:
-      - monitoring
-      
+      monitoring:
+        ipv4_address: 172.25.0.21
+
   node-exporter:
     image: quay.io/prometheus/node-exporter
     container_name: node-exporter
     ports:
       - "9100:9100"  # Default port for node-exporter
     networks:
-      - monitoring
+      monitoring:
+        ipv4_address: 172.25.0.22
     restart: always
 
 networks:
   monitoring:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
 
 volumes:
   grafana_storage:
-  prometheus_storage:
   webapp_storage:
