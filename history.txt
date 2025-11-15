@@ -1,0 +1,14 @@
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' node-exporter my-webapp
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["172.17.0.2:9100"]
+        labels:
+          app: "node-exporter"
+  - job_name: "my-webapp"
+    static_configs:
+      - targets: ["172.17.0.5:9100"] 
+        labels:
+          app: "my-webapp"
