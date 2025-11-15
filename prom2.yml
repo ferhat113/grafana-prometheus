@@ -1,0 +1,19 @@
+# ~/grafana-prometheus/prom2.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+          # - alertmanager:9093
+
+rule_files: []
+
+scrape_configs:
+  - job_name: "nodes"
+    static_configs:
+      - targets:
+          - "node3:9100"
+          - "node4:9100"
